@@ -17,7 +17,7 @@ public class ModExp implements Expression{
 
     @Override
     public String emit(){
-        infix = "(" + left.emit() + " + " + right.emit() +")";
+        infix = "(" + left.emit() + " % " + right.emit() +")";
         return infix;
     }
 }

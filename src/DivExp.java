@@ -12,12 +12,12 @@ public class DivExp implements Expression{
 
     @Override
     public int evaluate(){
-        return left.evaluate() * right.evaluate();
+        return left.evaluate() / right.evaluate();
     }
 
     @Override
     public String emit(){
-        infix = "(" + left.emit() + " + " + right.emit() +")";
+        infix = "(" + left.emit() + " / " + right.emit() +")";
         return infix;
     }
 }
