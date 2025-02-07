@@ -3,6 +3,7 @@ import java.util.List;
 public class MulExp implements Expression{
     private Expression left;
     private Expression right;
+    private String infix;
 
 
     public MulExp(Expression left, Expression right) {
@@ -17,6 +18,7 @@ public class MulExp implements Expression{
 
     @Override
     public String emit(){
-        return "nah";
+        infix = "(" + left.emit() + " * " + right.emit() +")";
+        return infix;
     }
 }

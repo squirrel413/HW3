@@ -18,6 +18,7 @@ public class AddExp implements Expression {
 
     @Override
     public String emit(){
+        infix = "(" + left.emit() + " + " + right.emit() +")";
         return infix;
     }
 }

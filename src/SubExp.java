@@ -3,7 +3,7 @@ import java.util.List;
 public class SubExp implements Expression{
     private Expression left;
     private Expression right;
-
+    private String infix;
 
     public SubExp(Expression left, Expression right) {
         this.left = left;
@@ -17,7 +17,8 @@ public class SubExp implements Expression{
 
     @Override
     public String emit(){
-        return "nah";
+        infix = "(" + left.emit() + " - " + right.emit() +")";
+        return infix;
     }
 }
 
