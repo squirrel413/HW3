@@ -5,25 +5,32 @@ import java.util.Scanner;
 
 public class Interp {
 
-    private final String PROMPT = "> ";
+    private static final String PROMPT = "> ";
+    private static boolean run = true;
     Scanner instruction;
-    private String user_input;
-
 
     public Interp() {
-        this.instruction = read_Input();
+        read_Input();
     }
 
-    private Scanner read_Input(){
+    private void read_Input(){
         instruction = new Scanner(System.in);
-        instruction.nextLine();
-        return instruction;
+        System.out.println("Welcome to your Arithmetic Interpreter! V1.0");
+        while(run){
+            System.out.print(PROMPT);
+            //instruction.nextLine();
+            if (instruction.hasNext("quit")){
+                run = false;
+            }
+            helper(instruction);
+            }
     }
 
     private int helper(Scanner instruction){
         Expression operation = null;
         Expression left;
         Expression right;
+        String infix = "";
 
         if (instruction.hasNextInt()) { //needed
             int x = instruction.nextInt();
@@ -35,31 +42,26 @@ public class Interp {
                     left = new IntExp(helper(instruction));
                     right = new IntExp(helper(instruction));
                     operation = new AddExp(left, right);
-                    //return operation.evaluate();
                     break;
                 case "-":
                     left = new IntExp(helper(instruction));
                     right = new IntExp(helper(instruction));
                     operation = new SubExp(left, right);
-                    //return operation.evaluate();
                     break;
                 case "*":
                     left = new IntExp(helper(instruction));
                     right = new IntExp(helper(instruction));
                     operation = new MulExp(left, right);
-                    //return operation.evaluate();
                     break;
                 case "/":
                     left = new IntExp(helper(instruction));
                     right = new IntExp(helper(instruction));
                     operation = new DivExp(left, right);
-                    //return operation.evaluate();
                     break;
                 case "%":
                     left = new IntExp(helper(instruction));
                     right = new IntExp(helper(instruction));
                     operation = new ModExp(left, right);
-                    //return operation.evaluate();
                     break;
             }
         }
