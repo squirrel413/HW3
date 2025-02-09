@@ -44,28 +44,28 @@ public class Interp {
         } else {
             switch (instruction.next().trim()) {
                 case "+":
-                    left = new IntExp(helper(instruction).evaluate());
-                    right = new IntExp(helper(instruction).evaluate());
+                    left = helper(instruction);
+                    right = helper(instruction);
                     operation = new AddExp(left, right);
                     break;
                 case "-":
-                    left = new IntExp(helper(instruction).evaluate());
-                    right = new IntExp(helper(instruction).evaluate());
+                    left = helper(instruction);
+                    right = helper(instruction);
                     operation = new SubExp(left, right);
                     break;
                 case "*":
-                    left = new IntExp(helper(instruction).evaluate());
-                    right = new IntExp(helper(instruction).evaluate());
+                    left = helper(instruction);
+                    right = helper(instruction);
                     operation = new MulExp(left, right);
                     break;
                 case "/":
-                    left = new IntExp(helper(instruction).evaluate());
-                    right = new IntExp(helper(instruction).evaluate());
+                    left = helper(instruction);
+                    right = helper(instruction);
                     operation = new DivExp(left, right);
                     break;
                 case "%":
-                    left = new IntExp(helper(instruction).evaluate());
-                    right = new IntExp(helper(instruction).evaluate());
+                    left = helper(instruction);
+                    right = helper(instruction);
                     operation = new ModExp(left, right);
                     break;
             }
