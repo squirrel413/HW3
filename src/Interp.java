@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,58 +15,62 @@ public class Interp {
     }
 
     private void read_Input(){
-        instruction = new Scanner(System.in);
+        Scanner user_Input = new Scanner(System.in);
         System.out.println("Welcome to your Arithmetic Interpreter! V1.0");
         while(run){
             System.out.print(PROMPT);
-            //instruction.nextLine();
+            String str = user_Input.nextLine();
+            instruction = new Scanner(str);
+
             if (instruction.hasNext("quit")){
                 run = false;
+                break;
             }
-            helper(instruction);
+            Expression root = helper(instruction);
+            System.out.println("Value: " + root.evaluate());
+            System.out.println("Infix: " + root.emit());
             }
     }
 
-    private int helper(Scanner instruction){
+    private Expression helper(Scanner instruction){
         Expression operation = null;
         Expression left;
         Expression right;
-        String infix = "";
 
         if (instruction.hasNextInt()) { //needed
             int x = instruction.nextInt();
-            left = new IntExp(x);
-            return left.evaluate(); //needed
+            operation = new IntExp(x);
+            return operation; //needed
         } else {
             switch (instruction.next().trim()) {
                 case "+":
-                    left = new IntExp(helper(instruction));
-                    right = new IntExp(helper(instruction));
+                    left = new IntExp(helper(instruction).evaluate());
+                    right = new IntExp(helper(instruction).evaluate());
                     operation = new AddExp(left, right);
                     break;
                 case "-":
-                    left = new IntExp(helper(instruction));
-                    right = new IntExp(helper(instruction));
+                    left = new IntExp(helper(instruction).evaluate());
+                    right = new IntExp(helper(instruction).evaluate());
                     operation = new SubExp(left, right);
                     break;
                 case "*":
-                    left = new IntExp(helper(instruction));
-                    right = new IntExp(helper(instruction));
+                    left = new IntExp(helper(instruction).evaluate());
+                    right = new IntExp(helper(instruction).evaluate());
                     operation = new MulExp(left, right);
                     break;
                 case "/":
-                    left = new IntExp(helper(instruction));
-                    right = new IntExp(helper(instruction));
+                    left = new IntExp(helper(instruction).evaluate());
+                    right = new IntExp(helper(instruction).evaluate());
                     operation = new DivExp(left, right);
                     break;
                 case "%":
-                    left = new IntExp(helper(instruction));
-                    right = new IntExp(helper(instruction));
+                    left = new IntExp(helper(instruction).evaluate());
+                    right = new IntExp(helper(instruction).evaluate());
                     operation = new ModExp(left, right);
                     break;
             }
         }
-        return operation.evaluate();
+        return operation;
     }
 
     public static void main(String[] args) {
